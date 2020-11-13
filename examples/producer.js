@@ -8,9 +8,11 @@ const PrettyConsoleLogger = require('./prettyConsoleLogger')
 const host = process.env.HOST_IP || ip.address()
 
 const kafka = new Kafka({
-  logLevel: logLevel.INFO,
+  requestTimeout: 3000,
+  enforceRequestTimeout: true,
+  logLevel: logLevel.DEBUG,
   logCreator: PrettyConsoleLogger,
-  brokers: [`${host}:39094`],
+  brokers: [`${host}:39094`, `${host}:29094`],
   clientId: 'example-producer',
   ssl: {
     servername: 'localhost',
